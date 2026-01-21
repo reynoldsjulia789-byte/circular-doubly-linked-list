@@ -67,7 +67,8 @@ public class CircularDoublyLinkedList<Type>
 
         /*
             Loops backward through the passed array.
-            This makes it so we can use the addFirst method to add the data to the list.
+            This makes it so we can use the addFirst method to add the data to the list while maintaining the order
+                of the elements to be added to the list.
          */
         for (idx = (data.length - 1); idx >= 0; idx--)
         {
@@ -109,6 +110,28 @@ public class CircularDoublyLinkedList<Type>
         this.head.prev = newNode;                              // relink head.prev
 
         this.size++;                                           // increment size
+    }
+
+    /** TODO: finish remove method
+     * Searches through the list for specified data, removing the first instance of it found.
+     *
+     * @param data the data to be removed from the list
+     * @return boolean indicating if the removal was successful
+     */
+    public boolean remove(Type data)
+    {
+        return false;
+    }
+
+    /**TODO: finish remove method
+     * Removes data from the list at the specified index.
+     *
+     * @param index the index of the data to be removed
+     * @return the data removed from the list
+     */
+    public Type remove(int index)
+    {
+        return null;
     }
 
     /**
