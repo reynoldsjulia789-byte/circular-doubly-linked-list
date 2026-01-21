@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test class for Circular Doubly Linked List
@@ -124,6 +124,83 @@ public class CircularDoublyLinkedListTest
             testlist.add(6);
 
             assertEquals("[1, 2, 3, 4, 5, 6]", testlist.toString());
+        }
+    }
+
+    @Nested
+    @DisplayName("remove Tests")
+    class removeTests
+    {
+        @Test
+        @DisplayName("Successfully removes specified element")
+        public void removeData()
+        {
+            CircularDoublyLinkedList<String> testlist;
+
+            testlist = new CircularDoublyLinkedList<>("A", "B", "C", "D");
+
+            testlist.remove("C");
+
+            assertEquals("[A, B, D]", testlist.toString());
+        }
+
+        @Test
+        @DisplayName("Returns true when successful")
+        public void removeDataTrue()
+        {
+            CircularDoublyLinkedList<String> testlist;
+
+            testlist = new CircularDoublyLinkedList<>("A", "B", "C", "D");
+
+            assertTrue(testlist.remove("C"));
+        }
+
+        @Test
+        @DisplayName("Returns false when object not found")
+        public void removeDataFalse()
+        {
+            CircularDoublyLinkedList<String> testlist;
+
+            testlist = new CircularDoublyLinkedList<>("A", "B", "C", "D");
+
+            assertFalse(testlist.remove("Z"));
+        }
+
+        @Test
+        @DisplayName("Removes element from end of list")
+        public void removeDataEndOfList()
+        {
+            CircularDoublyLinkedList<String> testlist;
+
+            testlist = new CircularDoublyLinkedList<>("A", "B", "C", "D");
+
+            testlist.remove("D");
+
+            assertEquals("[A, B, C]", testlist.toString());
+        }
+
+        @Test
+        @DisplayName("Removes element from beginning of list")
+        public void removeDataBeginningOfList()
+        {
+            CircularDoublyLinkedList<String> testlist;
+
+            testlist = new CircularDoublyLinkedList<>("A", "B", "C", "D");
+
+            testlist.remove("A");
+
+            assertEquals("[B, C, D]", testlist.toString());
+        }
+
+        @Test
+        @DisplayName("Removes element at index")
+        public void removeIndex()
+        {
+            CircularDoublyLinkedList<String> testlist;
+
+            testlist = new CircularDoublyLinkedList<>("A", "B", "C", "D");
+
+            assertEquals("C", testlist.remove(2));
         }
     }
 }
