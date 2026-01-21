@@ -131,6 +131,16 @@ public class CircularDoublyLinkedList<Type>
      */
     public Type remove(int index)
     {
+        Node prev, curr;
+
+        if (index < 0 || index >= this.size)                    // this.size is out of bounds since we start at index 0
+        {
+            throw new IndexOutOfBoundsException("cannot remove data from list. index is out of list bounds");
+        }
+
+        // find which direction to traverse the list based on what would be faster - split list in half
+
+
         return null;
     }
 
