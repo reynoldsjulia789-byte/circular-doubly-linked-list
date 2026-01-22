@@ -328,6 +328,18 @@ public class CircularDoublyLinkedListTest
         }
 
         @Test
+        @DisplayName("Removes element in middle of the list")
+        public void removeMiddle()
+        {
+            CircularDoublyLinkedList<Integer> testlist;
+
+            testlist = new CircularDoublyLinkedList<>(0, 1, 2, 3, 4);
+
+            assertEquals(2, testlist.removeIndex(2));
+            assertEquals("[0, 1, 3, 4]", testlist.toString());
+        }
+
+        @Test
         @DisplayName("throws exception when index is out of bounds")
         public void outOfBounds()
         {
