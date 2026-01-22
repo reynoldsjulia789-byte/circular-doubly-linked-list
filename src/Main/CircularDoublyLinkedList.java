@@ -77,48 +77,34 @@ public class CircularDoublyLinkedList<Type>
     }
 
     /**
-     * Adds a new node at the start of the list containing the data to be stored.
+     * Adds data to the beginning of the list.
      *
      * @param data the data to store in the list
      */
     public void addFirst(Type data)
     {
-        Node newNode;
-
-        newNode        = new Node(this.head, data, this.head.next);     // Creates new node with prev pointing to the
-                                                                        // head node & next linked to head.next's node
-        this.head.next.prev = newNode;                                  // re-links head.next.prev to point at new node
-        this.head.next      = newNode;                                  // re-links head.next to point at new node
-
-        this.size++;                                                    // increments size
+        add(data, 0);
     }
 
     /**
-     * Adds a new node at the end of the list containing the data to add to the list.
+     * Adds data to the end of the list.
      *
      * @param data the data to add to the list
      */
     public void add(Type data)
     {
-        Node curr, newNode;
 
-        // since we have a link to the previous node and our list is circularly linked, we can go to the end of the list
-        curr           = this.head.prev;
-
-        newNode        = new Node(curr, data, curr.next);      // make a new node that is linked properly
-        curr.next      = newNode;                              // relink curr.next
-        this.head.prev = newNode;                              // relink head.prev
-
-        this.size++;                                           // increment size
+        add(data, this.size); // since we have a method that adds at a specified index, we can call it
     }
 
     /**
-     * Adds a new node at the specified index in the list.
+     * Adds data at the specified index within the list
      *
      * @param data the data to add to the list
      * @param index the location in the list to add the data
+     * @throws IndexOutOfBoundsException throws exception if index is outside of list bounds
      */
-    public void add(Type data, int index)
+    public void add(Type data, int index) throws IndexOutOfBoundsException
     {
         int  curridx;
         Node curr, newNode;
@@ -177,8 +163,9 @@ public class CircularDoublyLinkedList<Type>
      *
      * @param index the index of the data to be removed
      * @return the data removed from the list
+     * @throws IndexOutOfBoundsException throws exception if index is outside of list bounds
      */
-    public Type remove(int index)
+    public Type remove(int index) throws IndexOutOfBoundsException
     {
         Node prev, curr;
 
