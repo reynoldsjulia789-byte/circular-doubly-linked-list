@@ -132,14 +132,27 @@ public class CircularDoublyLinkedListTest
     class addIndexTests
     {
         @Test
-        @DisplayName("can add in middle of list")
-        public void addsAtIndex()
+        @DisplayName("can add in right half of list")
+        public void addsAtIndexRight()
         {
             CircularDoublyLinkedList<Integer> testlist;
 
-            testlist = new CircularDoublyLinkedList<>(0, 1, 2, 4, 5);
+            testlist = new CircularDoublyLinkedList<>(0, 1, 2, 3, 5);
 
-            testlist.add(3, 3);
+            testlist.add(4, 4);
+
+            assertEquals("[0, 1, 2, 3, 4, 5]", testlist.toString());
+        }
+
+        @Test
+        @DisplayName("can add in left half of list")
+        public void addsAtIndexLeft()
+        {
+            CircularDoublyLinkedList<Integer> testlist;
+
+            testlist = new CircularDoublyLinkedList<>(0, 2, 3, 4, 5);
+
+            testlist.add(1, 1);
 
             assertEquals("[0, 1, 2, 3, 4, 5]", testlist.toString());
         }
