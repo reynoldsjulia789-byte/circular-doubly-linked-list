@@ -69,6 +69,9 @@ public class CircularDoublyLinkedList<Type>
             Loops backward through the passed array.
             This makes it so we can use the addFirst method to add the data to the list while maintaining the order
                 of the elements to be added to the list.
+            In a singly linked list that doesn't keep track of the tail of the list, or a non-circular doubly linked
+                list, utilizing the addFirst method would be significantly faster for long lists since you can just add
+                to the front of the list rather than traversing through the entire list each time you add a new element.
          */
         for (idx = (data.length - 1); idx >= 0; idx--)
         {
