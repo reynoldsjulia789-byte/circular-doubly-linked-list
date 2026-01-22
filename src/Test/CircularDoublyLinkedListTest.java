@@ -128,6 +128,63 @@ public class CircularDoublyLinkedListTest
     }
 
     @Nested
+    @DisplayName("add at index Tests")
+    class addIndexTests
+    {
+        @Test
+        @DisplayName("can add in middle of list")
+        public void addsAtIndex()
+        {
+            CircularDoublyLinkedList<Integer> testlist;
+
+            testlist = new CircularDoublyLinkedList<>(0, 1, 2, 4, 5);
+
+            testlist.add(3, 3);
+
+            assertEquals("[0, 1, 2, 3, 4, 5]", testlist.toString());
+        }
+
+        @Test
+        @DisplayName("can add to empty list")
+        public void addsToEmpty()
+        {
+            CircularDoublyLinkedList<String> testlist;
+
+            testlist = new CircularDoublyLinkedList<>();
+
+            testlist.add("new", 0);
+
+            assertEquals("[new]", testlist.toString());
+        }
+
+        @Test
+        @DisplayName("can add at beginning of list")
+        public void addAtFront()
+        {
+            CircularDoublyLinkedList<Integer> testlist;
+
+            testlist = new CircularDoublyLinkedList<>(1, 2, 3, 4, 5);
+
+            testlist.add(0, 0);
+
+            assertEquals("[0, 1, 2, 3, 4, 5]", testlist.toString());
+        }
+
+        @Test
+        @DisplayName("can add at end of list")
+        public void addAtEnd()
+        {
+            CircularDoublyLinkedList<Integer> testlist;
+
+            testlist = new CircularDoublyLinkedList<>(0, 1, 2, 3, 4);
+
+            testlist.add(5, 5);
+
+            assertEquals("[0, 1, 2, 3, 4, 5]", testlist.toString());
+        }
+    }
+
+    @Nested
     @DisplayName("remove Tests")
     class removeTests
     {
