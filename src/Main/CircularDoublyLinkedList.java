@@ -69,11 +69,11 @@ public class CircularDoublyLinkedList<Type>
 
         /*
             Loops backward through the passed array.
-            This makes it so we can use the addFirst method to add the data to the list while maintaining the order
+            This makes it so we can use the addFirst method to addAtIndex the data to the list while maintaining the order
                 of the elements to be added to the list.
             In a singly linked list that doesn't keep track of the tail of the list, or a non-circular doubly linked
-                list, utilizing the addFirst method would be significantly faster for long lists since you can just add
-                to the front of the list rather than traversing through the entire list each time you add a new element.
+                list, utilizing the addFirst method would be significantly faster for long lists since you can just addAtIndex
+                to the front of the list rather than traversing through the entire list each time you addAtIndex a new element.
          */
         for (idx = (data.length - 1); idx >= 0; idx--)
         {
@@ -88,36 +88,36 @@ public class CircularDoublyLinkedList<Type>
      */
     public void addFirst(Type data)
     {
-        add(data, 0);
+        addAtIndex(data, 0);
     }
 
     /**
      * Adds data to the end of the list.
      *
-     * @param data the data to add to the list
+     * @param data the data to addAtIndex to the list
      */
-    public void add(Type data)
+    public void addLast(Type data)
     {
 
-        add(data, this.size); // since we have a method that adds at a specified index, we can call it
+        addAtIndex(data, this.size); // since we have a method that adds at a specified index, we can call it
     }
 
     /**
      * Adds data at the specified index within the list
      *
-     * @param data the data to add to the list
-     * @param index the location in the list to add the data
+     * @param data the data to addAtIndex to the list
+     * @param index the location in the list to addAtIndex the data
      * @throws IndexOutOfBoundsException throws exception if index is outside of list bounds
      */
-    public void add(Type data, int index) throws IndexOutOfBoundsException
+    public void addAtIndex(Type data, int index) throws IndexOutOfBoundsException
     {
         int  curridx;
         Node curr, newNode;
 
-        // we are considering this.size in bounds in case we want to add on to the end of the list.
+        // we are considering this.size in bounds in case we want to addAtIndex on to the end of the list.
         if (index < 0 || index > this.size)
         {
-            throw new IndexOutOfBoundsException("cannot add data to list. index is out of bounds");
+            throw new IndexOutOfBoundsException("cannot addAtIndex data to list. index is out of bounds");
         }
 
         // go forwards through the list if index is in the left half or middle of the list, or if the list is empty.
@@ -125,7 +125,7 @@ public class CircularDoublyLinkedList<Type>
         {
             curr = this.head;
 
-            for (curridx = 0; curridx < index; curridx++)   // we want to stop one before the index we want to add at
+            for (curridx = 0; curridx < index; curridx++)   // we want to stop one before the index we want to addAtIndex at
             {
                 curr = curr.next;
             }
@@ -271,12 +271,12 @@ public class CircularDoublyLinkedList<Type>
          */
         for (curr = this.head.next; curr.next != this.head; curr = curr.next)
         {
-            builder.append(curr.data.toString());                               // add the data to the string
-            builder.append(", ");                                               // add a comma and space to the string
+            builder.append(curr.data.toString());                               // addAtIndex the data to the string
+            builder.append(", ");                                               // addAtIndex a comma and space to the string
         }
 
-        builder.append(curr.data.toString());                                   // add the data in the last list node
-        builder.append("]");                                                    // add ] to end the string
+        builder.append(curr.data.toString());                                   // addAtIndex the data in the last list node
+        builder.append("]");                                                    // addAtIndex ] to end the string
 
         return builder.toString();                                              // return the completed string
     }
