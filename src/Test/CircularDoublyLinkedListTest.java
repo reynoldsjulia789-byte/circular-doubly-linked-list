@@ -198,8 +198,8 @@ public class CircularDoublyLinkedListTest
     }
 
     @Nested
-    @DisplayName("remove Tests")
-    class removeTests
+    @DisplayName("remove data Tests")
+    class removeDataTests
     {
         @Test
         @DisplayName("Successfully removes specified element")
@@ -261,7 +261,12 @@ public class CircularDoublyLinkedListTest
 
             assertEquals("[B, C, D]", testlist.toString());
         }
+    }
 
+    @Nested
+    @DisplayName("remove at index Tests")
+    class removeIndexTests
+    {
         @Test
         @DisplayName("Removes element at index")
         public void removeIndex()
@@ -271,6 +276,42 @@ public class CircularDoublyLinkedListTest
             testlist = new CircularDoublyLinkedList<>("A", "B", "C", "D");
 
             assertEquals("C", testlist.remove(2));
+            assertEquals("[A, B, D]", testlist.toString());
+        }
+
+        @Test
+        @DisplayName("Removes element at beginning of list")
+        public void removeFirst()
+        {
+            CircularDoublyLinkedList<String> testlist;
+
+            testlist = new CircularDoublyLinkedList<>("A", "B", "C", "D");
+
+            assertEquals("A", testlist.remove(0));
+            assertEquals("[B, C, D]", testlist.toString());
+        }
+
+        @Test
+        @DisplayName("Removes element at end of list")
+        public void removeLast()
+        {
+            CircularDoublyLinkedList<String> testlist;
+
+            testlist = new CircularDoublyLinkedList<>("A", "B", "C", "D");
+
+            assertEquals("D", testlist.remove(3));
+            assertEquals("[A, B, C]", testlist.toString());
+        }
+
+        @Test
+        @DisplayName("throws exception when index is out of bounds")
+        public void outOfBounds()
+        {
+            CircularDoublyLinkedList<String> testlist;
+
+            testlist = new CircularDoublyLinkedList<>("A", "B", "C", "D");
+
+            assertThrows(IndexOutOfBoundsException.class, () -> testlist.remove(4));
         }
     }
 }
