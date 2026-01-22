@@ -1,5 +1,7 @@
 package Main;
 
+import java.util.Objects;
+
 /**
  * Circular Doubly Linked List.
  * Created for learning purposes.
@@ -151,14 +153,40 @@ public class CircularDoublyLinkedList<Type>
         this.size++;                                     // increment size by 1 to ensure size is accurate
     }
 
-    /** TODO: finish remove method
+    /**
      * Searches through the list for specified data, removing the first instance of it found.
      *
      * @param data the data to be removed from the list
      * @return boolean indicating if the removal was successful
      */
-    public boolean remove(Type data)
+    public boolean removeData(Type data)
     {
+        Node prev, curr;
+
+        if (size == 0)
+        {
+            return false;                               // no data stored in empty list
+        }
+
+        prev = this.head;
+        curr = this.head.next;                          // start on the first real node in the linked list
+
+        // move through the list until we either loop back around to the head or find the data we are looking for
+        while (curr != this.head)
+        {
+            if (Objects.equals(curr.data, data))        // match found, now we remove it
+            {
+                prev.next      = curr.next;             // set the next variable in the prev node to the node after curr
+                curr.next.prev = prev;                  // set the prev variable in the node after curr to prev
+
+                return true;                            // curr has been cut out of the list, so we return true.
+            }
+
+            prev = curr;                                // move prev forward one node
+            curr = curr.next;                           // move curr forward one node
+        }
+
+        // at this point we have traversed through the entire list and not found the data we were looking to remove.
         return false;
     }
 
@@ -169,7 +197,7 @@ public class CircularDoublyLinkedList<Type>
      * @return the data removed from the list
      * @throws IndexOutOfBoundsException throws exception if index is outside of list bounds
      */
-    public Type remove(int index) throws IndexOutOfBoundsException
+    public Type removeIndex(int index) throws IndexOutOfBoundsException
     {
         int  curridx;
         Node prev, curr;
