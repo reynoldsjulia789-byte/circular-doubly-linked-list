@@ -112,6 +112,55 @@ public class CircularDoublyLinkedList<Type>
         this.size++;                                           // increment size
     }
 
+    /**
+     * Adds a new node at the specified index in the list.
+     *
+     * @param data the data to add to the list
+     * @param index the location in the list to add the data
+     */
+    public void add(Type data, int index)
+    {
+        int  curridx;
+        Node curr, newNode;
+
+        // we are considering this.size in bounds in case we want to add on to the end of the list.
+        if (index < 0 || index > this.size)
+        {
+            throw new IndexOutOfBoundsException("cannot add data to list. index is out of bounds");
+        }
+
+        if(index <= (this.size / 2))     // go forwards through the list because it is less distance to travel.
+        {
+            curr = this.head;
+
+            for (curridx = 0; curridx < index; curridx++)  // we want to stop one before the index we want to add at
+            {
+                curr = curr.next;
+            }
+
+            newNode = new Node(curr, data, curr.next);       // create a new node with the prev and curr nodes linked
+
+            curr.next.prev = newNode;                        // relink the prev variable in the next node
+            curr.next      = newNode;                        // relink the next variable in the current node
+        }
+        else                           // go backwards through the list because to have less distance to travel.
+        {
+            curr = this.head;
+
+            for (curridx = this.size; curridx > index; curridx--) // go backwards until desired index is reached.
+            {
+                curr = curr.prev;
+            }
+
+            newNode = new Node(curr.prev, data, curr);       // create a new node with the prev and curr nodes linked
+
+            curr.prev.next = newNode;                        // relink the next variable in the previous node
+            curr.prev      = newNode;                        // relink the prev variable in the current node
+        }
+
+        this.size++;                                     // increment size by 1 to ensure size is accurate
+    }
+
     /** TODO: finish remove method
      * Searches through the list for specified data, removing the first instance of it found.
      *
