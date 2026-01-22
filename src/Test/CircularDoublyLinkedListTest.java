@@ -45,7 +45,7 @@ public class CircularDoublyLinkedListTest
     class addFirstTests
     {
         @Test
-        @DisplayName("Can add string elements")
+        @DisplayName("Can add String elements")
         public void addsStringElements()
         {
             CircularDoublyLinkedList<String> testlist;
@@ -92,21 +92,21 @@ public class CircularDoublyLinkedListTest
     }
 
     @Nested
-    @DisplayName("add Tests")
-    class addTests
+    @DisplayName("addLast Tests")
+    class addLastTests
     {
         @Test
-        @DisplayName("Can add string elements")
+        @DisplayName("Can add String elements")
         public void addsStringElements()
         {
             CircularDoublyLinkedList<String> testlist;
 
             testlist = new CircularDoublyLinkedList<>();
 
-            testlist.add("A");
-            testlist.add("B");
-            testlist.add("C");
-            testlist.add("D");
+            testlist.addLast("A");
+            testlist.addLast("B");
+            testlist.addLast("C");
+            testlist.addLast("D");
 
             assertEquals("[A, B, C, D]", testlist.toString());
         }
@@ -119,16 +119,16 @@ public class CircularDoublyLinkedListTest
 
             testlist = new CircularDoublyLinkedList<>(1, 2, 3);
 
-            testlist.add(4);
-            testlist.add(5);
-            testlist.add(6);
+            testlist.addLast(4);
+            testlist.addLast(5);
+            testlist.addLast(6);
 
             assertEquals("[1, 2, 3, 4, 5, 6]", testlist.toString());
         }
     }
 
     @Nested
-    @DisplayName("add at index Tests")
+    @DisplayName("addAtIndex Tests")
     class addIndexTests
     {
         @Test
@@ -139,7 +139,7 @@ public class CircularDoublyLinkedListTest
 
             testlist = new CircularDoublyLinkedList<>(0, 1, 2, 3, 5);
 
-            testlist.add(4, 4);
+            testlist.addAtIndex(4, 4);
 
             assertEquals("[0, 1, 2, 3, 4, 5]", testlist.toString());
         }
@@ -152,9 +152,22 @@ public class CircularDoublyLinkedListTest
 
             testlist = new CircularDoublyLinkedList<>(0, 2, 3, 4, 5);
 
-            testlist.add(1, 1);
+            testlist.addAtIndex(1, 1);
 
             assertEquals("[0, 1, 2, 3, 4, 5]", testlist.toString());
+        }
+
+        @Test
+        @DisplayName("can add to middle of the list")
+        public void addsToMiddle()
+        {
+            CircularDoublyLinkedList<Integer> testlist;
+
+            testlist = new CircularDoublyLinkedList<>(0, 1, 3, 4);
+
+            testlist.addAtIndex(2, 2);
+
+            assertEquals("[0, 1, 2, 3, 4]", testlist.toString());
         }
 
         @Test
@@ -165,7 +178,7 @@ public class CircularDoublyLinkedListTest
 
             testlist = new CircularDoublyLinkedList<>();
 
-            testlist.add("new", 0);
+            testlist.addAtIndex("new", 0);
 
             assertEquals("[new]", testlist.toString());
         }
@@ -178,7 +191,7 @@ public class CircularDoublyLinkedListTest
 
             testlist = new CircularDoublyLinkedList<>(1, 2, 3, 4, 5);
 
-            testlist.add(0, 0);
+            testlist.addAtIndex(0, 0);
 
             assertEquals("[0, 1, 2, 3, 4, 5]", testlist.toString());
         }
@@ -191,7 +204,7 @@ public class CircularDoublyLinkedListTest
 
             testlist = new CircularDoublyLinkedList<>(0, 1, 2, 3, 4);
 
-            testlist.add(5, 5);
+            testlist.addAtIndex(5, 5);
 
             assertEquals("[0, 1, 2, 3, 4, 5]", testlist.toString());
         }
