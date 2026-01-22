@@ -118,19 +118,20 @@ public class CircularDoublyLinkedList<Type>
             throw new IndexOutOfBoundsException("cannot add data to list. index is out of bounds");
         }
 
-        if(index <= (this.size / 2))     // go forwards through the list because it is less distance to travel.
+        // go forwards through the list if index is in the left half or middle of the list, or if the list is empty.
+        if (index <= (this.size - 1) || this.size == 0)
         {
             curr = this.head;
 
-            for (curridx = 0; curridx < index; curridx++)  // we want to stop one before the index we want to add at
+            for (curridx = 0; curridx < index; curridx++)   // we want to stop one before the index we want to add at
             {
                 curr = curr.next;
             }
 
-            newNode = new Node(curr, data, curr.next);       // create a new node with the prev and curr nodes linked
+            newNode = new Node(curr, data, curr.next);      // create a new node with the prev and curr nodes linked
 
-            curr.next.prev = newNode;                        // relink the prev variable in the next node
-            curr.next      = newNode;                        // relink the next variable in the current node
+            curr.next.prev = newNode;                       // relink the prev variable in the next node
+            curr.next      = newNode;                       // relink the next variable in the current node
         }
         else                           // go backwards through the list because to have less distance to travel.
         {
@@ -161,7 +162,7 @@ public class CircularDoublyLinkedList<Type>
         return false;
     }
 
-    /**TODO: finish remove method
+    /**
      * Removes data from the list at the specified index.
      *
      * @param index the index of the data to be removed
@@ -170,17 +171,47 @@ public class CircularDoublyLinkedList<Type>
      */
     public Type remove(int index) throws IndexOutOfBoundsException
     {
+        int  curridx;
         Node prev, curr;
 
-        if (index < 0 || index >= this.size)                    // this.size is out of bounds since we start at index 0
+        if (index < 0 || index >= this.size)                  // this.size is out of bounds since we start at index 0
         {
             throw new IndexOutOfBoundsException("cannot remove data from list. index is out of list bounds");
         }
 
-        // find which direction to traverse the list based on what would be faster - split list in half
+        // go forwards through the list if index is in the left half or middle of the list.
+        if (index <= (this.size - 1))
+        {
+            prev = this.head;
+            curr = this.head.next;                         // start on the first real list node
 
+            for (curridx = 0; curridx < index; curridx++)  // we want to stop on the index we want to remove
+            {
+                prev = curr;
+                curr = curr.next;
+            }
 
-        return null;
+            prev.next      = curr.next;     // relink the next variable in the previous node to point to the next node.
+            curr.next.prev = prev;          // relink the prev variable in the node after the one to delete to prev.
+        }
+        else                           // go backwards through the list because to have less distance to travel.
+        {
+            prev = this.head;
+            curr = this.head.prev;                         // start on the last real list node
+
+            for (curridx = this.size; curridx > index; curridx--) // go backwards until desired index is reached.
+            {
+                prev = curr;
+                curr = curr.prev;
+            }
+
+            prev.prev      = curr.prev;    // relink the prev variable in the previous node to the node after curr
+            curr.prev.next = prev;         // relink the next variable in the node after curr to prev.
+        }
+
+        this.size--;                                       // decrement size by 1 to ensure list size is kept accurate
+
+        return curr.data;
     }
 
     /**
