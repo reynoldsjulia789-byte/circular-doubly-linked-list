@@ -209,7 +209,7 @@ public class CircularDoublyLinkedListTest
 
             testlist = new CircularDoublyLinkedList<>("A", "B", "C", "D");
 
-            testlist.remove("C");
+            testlist.removeData("C");
 
             assertEquals("[A, B, D]", testlist.toString());
         }
@@ -222,7 +222,7 @@ public class CircularDoublyLinkedListTest
 
             testlist = new CircularDoublyLinkedList<>("A", "B", "C", "D");
 
-            assertTrue(testlist.remove("C"));
+            assertTrue(testlist.removeData("C"));
         }
 
         @Test
@@ -233,7 +233,18 @@ public class CircularDoublyLinkedListTest
 
             testlist = new CircularDoublyLinkedList<>("A", "B", "C", "D");
 
-            assertFalse(testlist.remove("Z"));
+            assertFalse(testlist.removeData("Z"));
+        }
+
+        @Test
+        @DisplayName("Returns false if list is empty")
+        public void removeDataEmptyList()
+        {
+            CircularDoublyLinkedList<String> testlist;
+
+            testlist = new CircularDoublyLinkedList<>();
+
+            assertFalse(testlist.removeData("Z"));
         }
 
         @Test
@@ -244,7 +255,7 @@ public class CircularDoublyLinkedListTest
 
             testlist = new CircularDoublyLinkedList<>("A", "B", "C", "D");
 
-            testlist.remove("D");
+            testlist.removeData("D");
 
             assertEquals("[A, B, C]", testlist.toString());
         }
@@ -257,7 +268,7 @@ public class CircularDoublyLinkedListTest
 
             testlist = new CircularDoublyLinkedList<>("A", "B", "C", "D");
 
-            testlist.remove("A");
+            testlist.removeData("A");
 
             assertEquals("[B, C, D]", testlist.toString());
         }
@@ -275,7 +286,7 @@ public class CircularDoublyLinkedListTest
 
             testlist = new CircularDoublyLinkedList<>("A", "B", "C", "D");
 
-            assertEquals("C", testlist.remove(2));
+            assertEquals("C", testlist.removeIndex(2));
             assertEquals("[A, B, D]", testlist.toString());
         }
 
@@ -287,7 +298,7 @@ public class CircularDoublyLinkedListTest
 
             testlist = new CircularDoublyLinkedList<>("A", "B", "C", "D");
 
-            assertEquals("A", testlist.remove(0));
+            assertEquals("A", testlist.removeIndex(0));
             assertEquals("[B, C, D]", testlist.toString());
         }
 
@@ -299,7 +310,7 @@ public class CircularDoublyLinkedListTest
 
             testlist = new CircularDoublyLinkedList<>("A", "B", "C", "D");
 
-            assertEquals("D", testlist.remove(3));
+            assertEquals("D", testlist.removeIndex(3));
             assertEquals("[A, B, C]", testlist.toString());
         }
 
@@ -311,7 +322,7 @@ public class CircularDoublyLinkedListTest
 
             testlist = new CircularDoublyLinkedList<>("A", "B", "C", "D");
 
-            assertThrows(IndexOutOfBoundsException.class, () -> testlist.remove(4));
+            assertThrows(IndexOutOfBoundsException.class, () -> testlist.removeIndex(4));
         }
     }
 }
